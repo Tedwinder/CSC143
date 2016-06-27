@@ -1,4 +1,7 @@
-//note - can open with "window builder editor"
+//Ted Callow "parseable_follow_along"
+
+package parseable_follow_along;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -70,7 +73,7 @@ public class parseable_follow_along {
 				if (myOpinion == itsOpinion) {txtAgreement.setText("Agrees");
 				
 				
-				}else {txtAgreement.setText("It's NOT Parseable");}
+				}else {txtAgreement.setText("DOES NOT AGREE");}
 					
 			}
 			
@@ -91,22 +94,31 @@ public class parseable_follow_along {
 			private boolean getMyOpinion(String r){
 				
 				char[] a = r.toCharArray();
-				boolean eOk= false;
-				boolean dotOk = false;
-				boolean minusOk = false;
+				boolean eOk= true;
+				boolean dotOk = true;
+				boolean minusOk = true;
+				int eCounter = 0;
+				int periodCounter=0;
+				int minusCounter=0;
 				
 				for (int i=0; i<a.length; i++){
 					char c = a[i];
 					if(c=='e' || c=='E'){
+						eCounter ++;
+						if(i==0||i==(a.length-1) || eCounter>1){eOk=false;}
 						
 						if(!eOk) return false; 
 							minusOk = true;
 							
 					
 					}else if (c=='.'){
+						periodCounter++;
+						if(periodCounter>1 || eCounter>=1){dotOk=false;}
 						if(!dotOk){return false;}
 						
 					}else if(c=='-'){
+						minusCounter++;
+						if(minusCounter>2 || !Character.isDigit(a[i+1])){minusOk=false;}
 						if(!minusOk){return false;}
 						
 					}else if (Character.isDigit(c)){
@@ -117,11 +129,6 @@ public class parseable_follow_along {
 				}return true;
 				
 			}
-			
-			
-			
-			
-			
 			
 			
 		});
