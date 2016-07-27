@@ -10,13 +10,13 @@ public class XMLRead {
 	try{
 	
 		ArrayList<Student> myData= new ArrayList<Student>();
-		FileInputStream fis= new FileInputStream("C:\\Users\\ecallow18310\\test3.xml");
+		FileInputStream fis= new FileInputStream("/Users/tedcu76/Documents/test1.xml");
 		XMLDecoder decoder = new XMLDecoder(fis);
 		myData=(ArrayList<Student>) decoder.readObject();
 	
 		System.out.println("how many students: " + myData.size());
 		for (int i=0;i<myData.size();i++){
-			System.out.println(myData[i]);//doesn't currently work
+			System.out.println("name:  " + myData.get(i).getName());
 		}
 		
 		decoder.close();
