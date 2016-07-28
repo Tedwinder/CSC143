@@ -28,29 +28,29 @@ public class Word {//remember if adding a constructor
 
 	
 	
-	String headword;
+	String hw;//headword
 	String pos;//part of speech
-	String pronunciation;
-	String definition;
-	String etymology;
+	String pr;//pronunciation
+	String def;//definition
+	String ety;//etymology
 	
 	
 	public Word(String headword,String pos, String pronunciation, String definition, String etymology){
-		this.headword=headword;
+		this.hw=headword;
 		this.pos=pos;
-		this.pronunciation=pronunciation;
-		this.definition=definition;
-		this.etymology=etymology;
+		this.pr=pronunciation;
+		this.def=definition;
+		this.ety=etymology;
 	}
 	public Word(){
 		
 	
 	}
 	public String getHeadword() {
-		return headword;
+		return hw;
 	}
 	public void setHeadword(String headword) {
-		this.headword = headword;
+		this.hw = headword;
 	}
 	public String getPos() {
 		return pos;
@@ -59,22 +59,22 @@ public class Word {//remember if adding a constructor
 		this.pos = pos;
 	}
 	public String getPronunciation() {
-		return pronunciation;
+		return pr;
 	}
 	public void setPronunciation(String pronunciation) {
-		this.pronunciation = pronunciation;
+		this.pr = pronunciation;
 	}
 	public String getDefinition() {
-		return definition;
+		return def;
 	}
 	public void setDefinition(String definition) {
-		this.definition = definition;
+		this.def = definition;
 	}
 	public String getEtymology() {
-		return etymology;
+		return ety;
 	}
 	public void setEtymology(String etymology) {
-		this.etymology = etymology;
+		this.ety = etymology;
 	}
 	
 }
