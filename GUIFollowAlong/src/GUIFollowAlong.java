@@ -1,18 +1,24 @@
+// GUIFollowAlong by TedCallow
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUIFollowAlong {
-
-	private JFrame frmGuifollowalong;
-	JTextField txtB;
-	JTextField txtA;
-	JTextField txtC;
-
+	int n;
+	 JFrame frame;
+	 JFrame frame_1;
+	 JFrame frame_1_1;
+	 JLabel[] lblA = new JLabel[3];
+	 JTextField[] txtA = new JTextField[n];
+	 JTextField textField;
+	 JTextField txtFofx;
+	private JTextField textX;
 	/**
 	 * Launch the application.
 	 */
@@ -21,7 +27,7 @@ public class GUIFollowAlong {
 			public void run() {
 				try {
 					GUIFollowAlong window = new GUIFollowAlong();
-					window.frmGuifollowalong.setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -40,50 +46,92 @@ public class GUIFollowAlong {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmGuifollowalong = new JFrame();
-		frmGuifollowalong.getContentPane().setBackground(new Color(127, 255, 212));
-		frmGuifollowalong.setTitle("GUIFollowAlong");
-		frmGuifollowalong.setBounds(100, 100, 650, 450);//1st 2 is x,y coordinates of location of upper left hand corner
-		frmGuifollowalong.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmGuifollowalong.getContentPane().setLayout(null);
+		JFrame frame;
+		frame_1_1 = new JFrame();
+		frame_1_1.setTitle("GUIFollowAlong by Morgan Hepfer");
+		frame_1_1 = frame_1_1;
+		frame_1_1.setBounds(100, 100, 650, 450);
+		frame_1_1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame_1_1.getContentPane().setLayout(null);
+		int ydelta = 25;
 		
-		JLabel lblQuadraticFormulaIn = new JLabel("Quadratic formula in the form f(x) = ax^2 + bx + c ");
-		lblQuadraticFormulaIn.setBounds(129, 86, 290, 14);
-		frmGuifollowalong.getContentPane().add(lblQuadraticFormulaIn);
+		for (int i = 0; i<3; i++){
+			char letter = (char) (65+i);
+			String label = letter + ":";
+			lblA[i] = new JLabel(label);
+			lblA[i].setHorizontalAlignment(SwingConstants.RIGHT);
+			lblA[i].setBounds(10, 60+i *ydelta, 46, 14);
+			frame_1.getContentPane().add(lblA[i]);
+			
+			JLabel lblA = new JLabel(label);
+
+			txtA[i] = new JTextField();
+			txtA[i].setBounds(66, 57, 86, 20);
+			frame_1_1.getContentPane().add(txtA[i]);
+			txtA[i].setColumns(10);
+
 		
-		JLabel lblA = new JLabel("a:");
-		lblA.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblA.setBackground(new Color(176, 224, 230));
-		lblA.setBounds(155, 166, 46, 14);
-		frmGuifollowalong.getContentPane().add(lblA);
+		JLabel lblQuadraticAxbxc = new JLabel("Quadratic: f(x) = Ax^2+Bx+C");
+		lblQuadraticAxbxc.setBounds(10, 11, 594, 49);
+		frame_1_1.getContentPane().add(lblQuadraticAxbxc);
 		
-		txtA = new JTextField();
-		txtA.setBounds(211, 163, 86, 20);
-		frmGuifollowalong.getContentPane().add(txtA);
-		txtA.setColumns(10);
+
+		JLabel lblX = new JLabel("X:");
+		lblX.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblX.setBounds(280, 60, 46, 14);
+		frame_1_1.getContentPane().add(lblX);
 		
+		textField = new JTextField();
+		textField.setBounds(336, 57, 86, 20);
+		frame_1_1.getContentPane().add(textField);
+		textField.setColumns(10);
 		
-		JLabel lblB = new JLabel("b:");
-		lblB.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblB.setBackground(new Color(176, 224, 230));
-		lblB.setBounds(205, 186, 46, 14);
-		frmGuifollowalong.getContentPane().add(lblB);
+		JButton btnEvaluateFx = new JButton("Evaluate f(x)");
+		btnEvaluateFx.addActionListener(new BtnEvaluateFxActionListener());
+		btnEvaluateFx.setBounds(311, 88, 111, 23);
+		frame_1_1.getContentPane().add(btnEvaluateFx);
 		
-		txtB = new JTextField();
-		txtB.setBounds(261, 183, 86, 20);
-		frmGuifollowalong.getContentPane().add(txtB);
-		txtB.setColumns(10);
+		txtFofx = new JTextField();
+		txtFofx.setBounds(336, 149, 86, 20);
+		frame_1_1.getContentPane().add(txtFofx);
+		txtFofx.setColumns(10);
 		
+		JLabel lblFx = new JLabel("F(x)=");
+		lblFx.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFx.setBounds(246, 152, 46, 14);
+		frame_1_1.getContentPane().add(lblFx);
+		txtA[i].setColumns(10);
+	}
+	}
+	
+	private double getNumber(JTextField jtf){
+		String s= jtf.getText();
+		double r=0;
+		try{
+			 r = Double.parseDouble(s);
+		}catch (Exception e){
+			System.out.println("by default 0.0");
+		}
+				return r;
+	}
+	private double[] getCoefs(){
+		double[] ret = new double[3];
+		for(int i=0; i<txtA.length;i++){
+			ret[i] = getNumber(txtA[i]);
+		}
+		return ret;
 		
-		JLabel lblC = new JLabel("c:");
-		lblC.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblC.setBackground(new Color(176, 224, 230));
-		lblC.setBounds(255, 206, 46, 14);
-		frmGuifollowalong.getContentPane().add(lblC);
-		
-		txtC = new JTextField();
-		txtC.setBounds(311, 203, 86, 20);
-		frmGuifollowalong.getContentPane().add(txtC);
-		txtC.setColumns(10);
+	}
+	
+	private class BtnEvaluateFxActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			txtFofx.setText("hello world");
+			
+			double[] coefs = getCoefs();
+			double x = getNumber(textX);
+			double fOfx = coefs[0] *x*x + coefs[1]*x+ coefs[0];
+			
+			txtFofx.setText(""+fOfx);
+		}
 	}
 }
