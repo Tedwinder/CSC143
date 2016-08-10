@@ -62,7 +62,7 @@ public class ConnectFour {
 
 		JOptionPane.showMessageDialog(null,"Connect Four by Komisi Petelo, Hana Bechara, Alex Gonzaga, and Ted Callow");
 
-		playerOne = playerSetup(1, Color.BLUE);//player 1 && color
+		playerOne = playerSetup(1, Color.YELLOW);//player 1 && color; change by Alex: Changed to yellow for a different color scheme
 		playerTwo = playerSetup(2, Color.RED);//player 2 && color
 		activePlayer = playerOne;//player 1 begins
 
@@ -74,38 +74,45 @@ public class ConnectFour {
 		
 		//each button calls a piece on the grid
 		btn1 = new JButton("1");//button to throw square in the first column
+		btn1 = new RoundButton("1"); // creates look of round button in background
 		btn1.addActionListener(new Btn1ActionListener());
-		btn1.setBounds(SPACER, ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);//spaces out the width of grid
+		btn1.setBounds(5, 18, GRID_WIDTH, 25); //spaces out the width of grid; moved all of the buttons to the top
 		frmConnectFour.getContentPane().add(btn1);
 
 		btn2 = new JButton("2");//button to throw square in the second column
+		btn2 = new RoundButton("2"); // repeated for remaining buttons
 		btn2.addActionListener(new Btn2ActionListener());
-		btn2.setBounds((SPACER * 2) + GRID_WIDTH, ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);
+		btn2.setBounds(60, 18, GRID_WIDTH, 25);
 		frmConnectFour.getContentPane().add(btn2);
 
 		btn3 = new JButton("3");//button to throw square in the third column
+		btn3 = new RoundButton("3"); 
 		btn3.addActionListener(new Btn3ActionListener());
-		btn3.setBounds((SPACER * 3) + (GRID_WIDTH * 2), ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);
+		btn3.setBounds(115, 18, GRID_WIDTH, 25);
 		frmConnectFour.getContentPane().add(btn3);
 
 		btn4 = new JButton("4//button to throw square in the fourth column
+		btn4 = new RoundButton("4");
 		btn4.addActionListener(new Btn4ActionListener());
-		btn4.setBounds((SPACER * 4) + (GRID_WIDTH * 3), ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);;
+		btn4.setBounds(170, 18, GRID_WIDTH, 25);;
 		frmConnectFour.getContentPane().add(btn4);
 
 		btn5 = new JButton("5");//button to throw square in the fifth column
+		btn5 = new RoundButton("5");
 		btn5.addActionListener(new Btn5ActionListener());
-		btn5.setBounds((SPACER * 5) + (GRID_WIDTH * 4), ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);;
+		btn5.setBounds(225, 18, GRID_WIDTH, 25);;
 		frmConnectFour.getContentPane().add(btn5);
 
 		btn6 = new JButton("6");//button to throw square in the sixth column
+		btn6 = new RoundButton("6");
 		btn6.addActionListener(new Btn6ActionListener());
-		btn6.setBounds((SPACER * 6) + (GRID_WIDTH * 5), ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);;
+		btn6.setBounds(280, 18, GRID_WIDTH, 25);;
 		frmConnectFour.getContentPane().add(btn6);
 
 		btn7 = new JButton("7");//button to throw square in the seventh column
+		btn7 = new RoundButton("7");
 		btn7.addActionListener(new Btn7ActionListener());
-		btn7.setBounds((SPACER * 7) + (GRID_WIDTH * 6), ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);;
+		btn7.setBounds(335, 18, GRID_WIDTH, 25);;
 		frmConnectFour.getContentPane().add(btn7);
 
 		lblActivePlayerText = new JLabel("Active player text");
@@ -113,7 +120,7 @@ public class ConnectFour {
 		lblActivePlayerText.setBackground(Color.LIGHT_GRAY);
 		lblActivePlayerText.setFont(new Font("Consolas", lblActivePlayerText.getFont().getStyle() | Font.BOLD, lblActivePlayerText.getFont().getSize() + 5));
 		lblActivePlayerText.setHorizontalAlignment(SwingConstants.CENTER);//player's name in the title box above grid
-		lblActivePlayerText.setBounds(5, 5, (GRID_WIDTH * 7) + (SPACER * 6), GRID_WIDTH - SPACER);
+		lblActivePlayerText.setBounds(5, 389, 398, 45); // moved the activeplayer text
 		lblActivePlayerText.setBorder(BorderFactory.createLineBorder(Color.black));
 		frmConnectFour.getContentPane().add(lblActivePlayerText);
 
