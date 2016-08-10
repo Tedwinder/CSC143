@@ -1,10 +1,7 @@
 
-//note - u have to import JSoup as an outside JAR to run this code. You can get it at https://jsoup.org/download
-// 
-
+import java.io.BufferedWriter;
 import java.io.File;
-
-
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -32,7 +29,7 @@ public class ReadXMLFile {
 		
 		        try {
 		
-		            htmlFile = Jsoup.parse(new File("/Users/tedcu76/Documents/gcide-0.51/CIDE.A"), "utf-8");
+		            htmlFile = Jsoup.parse(new File("/Users/tedcu76/Documents/gcide-0.51/CIDE.A"), "utf-8");//path from where you stored the downloaded GCIDE dictionary
 		
 		        } catch (IOException e) {
 		
@@ -50,7 +47,8 @@ public class ReadXMLFile {
 	
 		
 		        System.out.println("This program uses Jsoup to parse GCIDE open source Dictionary and create SQLite Insert Statements");
-		        PrintWriter writer = new PrintWriter("/Users/tedcu76/Documents/Inserts/Inserts.txt", "UTF-8");
+		        //PrintWriter writer = new PrintWriter("/Users/tedcu76/Documents/Inserts/Inserts.txt", "UTF-8");
+		        PrintWriter writer = new PrintWriter("/Users/tedcu76/Documents/Inserts.txt", "UTF-8");
 		        //System.out.println("title : " + title);
 		        int i=0;
 		        for(org.jsoup.nodes.Element element: all){
@@ -59,22 +57,33 @@ public class ReadXMLFile {
 		        	Elements word = element.getElementsByTag("ent");
 		        	Elements pronunciation = element.getElementsByTag("pr");
 		        	if (!(word.isEmpty())){
+		        		String w=word.text();
+		        		w=w.replace('"', '\"');
+		        		w=w.replace("'", "\'");
+		        		String d=definition.text();
+		        		d=d.replace('"', '\"');
+		        		d=d.replace("'", "\'");
+		        		String p=pronunciation.text();
+		        		p=p.replace('"', '\"');
+		        		p=p.replace("'", "\'");
 		        	writer.println("db.execSQL(\"INSERT INTO word VALUES (" + i + ", '" 
-		        			+ word.text() + "',  '" + definition.text() + 
-		        			"', " + pronunciation.text() + "')\");" + "\n");i++;}
+		        			+ w + "',  '" + d + 
+		        			"', " + p + "')\");" + "\n");i++;}
 		        	//db.execSQL("INSERT INTO word VALUES (0, 'thingy', 'some sort of thingy', 'etc.')");
 		        	
 		        }System.out.println("A");
 		        
 		        //append to existing doc
-		        
-		        
-		        
+		        String docName="/Users/tedcu76/Documents/Inserts.txt";//the path to the document you want to create
+		        FileWriter fileWritter = new FileWriter(docName,true);
+		        BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
 		        for(char alphabet = 'B'; alphabet <= 'Z';alphabet++) {
 		        	System.out.println(alphabet);
 		        	int j=0;
-		        	String docName="/Users/tedcu76/Documents/Inserts/"+alphabet +"Inserts.txt";
-		        	writer = new PrintWriter(docName, "UTF-8");
+		        	//String docName="/Users/tedcu76/Documents/Inserts/"+alphabet +"Inserts.txt";
+		        	//String docName="/Users/tedcu76/Documents/Inserts.txt";
+		        	//writer = new PrintWriter(docName, "UTF-8");
+		        	
 		        	 try {
 				    		String path = "/Users/tedcu76/Documents/gcide-0.51/CIDE."+alphabet;
 				            htmlFile = Jsoup.parse(new File(path), "utf-8");
@@ -95,15 +104,23 @@ public class ReadXMLFile {
 				        	Elements word = element.getElementsByTag("ent");
 				        	Elements pronunciation = element.getElementsByTag("pr");
 				        	if (!(word.isEmpty())){
-				        	writer.write("db.execSQL(\"INSERT INTO word VALUES (" + i + ", '" 
-				        			+ word.text() + "',  '" + definition.text() + 
-				        			"', " + pronunciation.text() + "')\");" + "\n");i++;}
+				        		//insert escape characters into quotations if any
+				        		String w=word.text();
+				        		w=w.replace('"', '\"');
+				        		w=w.replace("'", "\'");
+				        		String d=definition.text();
+				        		d=d.replace('"', '\"');
+				        		d=d.replace("'", "\'");
+				        		String p=pronunciation.text();
+				        		p=p.replace('"', '\"');
+				        		p=p.replace("'", "\'");
+				        		bufferWritter.write("db.execSQL(\"INSERT INTO word VALUES (" + i + ", '" 
+				        			+ w + "',  '" + d + 
+				        			"', " + p + "')\");" + "\n");i++;}
 		        	 
 		        	 
 		        }
 		        
-		        
-		        writer.close();
 		        
 		        
 		        
@@ -122,7 +139,9 @@ public class ReadXMLFile {
 		    }
 		
 		  
-		
+		        writer.close();
+		        bufferWritter.close();
+		        
 		}
 
 }
