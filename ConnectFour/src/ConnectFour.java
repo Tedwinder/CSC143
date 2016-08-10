@@ -1,4 +1,4 @@
-//Connect Four by Komisi Petelo, Mina Akhnoukh, and Nolan Briggs 
+//Connect Four by Komisi Petelo, Hana Bechara, Alex Gonzaga and Ted Callow 
 
 import java.awt.Color;
 import java.awt.EventQueue;
