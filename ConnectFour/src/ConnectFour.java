@@ -22,9 +22,9 @@ public class ConnectFour {
 	private JButton btn1, btn2, btn3, btn4, btn5, btn6, btn7;
 	private int turnCounter = 1;
 	private static int SPACER = 5;
-	private static int GRID_WIDTH = 50;
-	private static int BOARD_WIDTH = 7;
-	private static int BOARD_HEIGHT = 6;
+	private static int GRID_WIDTH = 50; //Size of grid
+	private static int BOARD_WIDTH = 7;// x axis (size of width)
+	private static int BOARD_HEIGHT = 6;// y axis (size of height)
 	private static ArrayList<ArrayList> boardArray;
 	private static Player playerOne, playerTwo, activePlayer;
 	private static Grid targetGrid;
@@ -60,49 +60,50 @@ public class ConnectFour {
 	 */
 	private void initialize() {
 
-		JOptionPane.showMessageDialog(null,"Connect Four by Komisi Petelo, Mina Akhnoukh, and Nolan Briggs");
+		JOptionPane.showMessageDialog(null,"Connect Four by Komisi Petelo, Hana Bechara, Alex Gonzaga, and Ted Callow");
 
-		playerOne = playerSetup(1, Color.BLUE);
-		playerTwo = playerSetup(2, Color.RED);
-		activePlayer = playerOne;
+		playerOne = playerSetup(1, Color.BLUE);//player 1 && color
+		playerTwo = playerSetup(2, Color.RED);//player 2 && color
+		activePlayer = playerOne;//player 1 begins
 
 		frmConnectFour = new JFrame();
 		frmConnectFour.setTitle("Connect Four!");
 		frmConnectFour.setBounds(100, 100, 409, 462);
 		frmConnectFour.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmConnectFour.getContentPane().setLayout(null);
-
-		btn1 = new JButton("1");
+		
+		//each button calls a piece on the grid
+		btn1 = new JButton("1");//button to throw square in the first column
 		btn1.addActionListener(new Btn1ActionListener());
-		btn1.setBounds(SPACER, ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);
+		btn1.setBounds(SPACER, ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);//spaces out the width of grid
 		frmConnectFour.getContentPane().add(btn1);
 
-		btn2 = new JButton("2");
+		btn2 = new JButton("2");//button to throw square in the second column
 		btn2.addActionListener(new Btn2ActionListener());
 		btn2.setBounds((SPACER * 2) + GRID_WIDTH, ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);
 		frmConnectFour.getContentPane().add(btn2);
 
-		btn3 = new JButton("3");
+		btn3 = new JButton("3");//button to throw square in the third column
 		btn3.addActionListener(new Btn3ActionListener());
 		btn3.setBounds((SPACER * 3) + (GRID_WIDTH * 2), ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);
 		frmConnectFour.getContentPane().add(btn3);
 
-		btn4 = new JButton("4");
+		btn4 = new JButton("4//button to throw square in the fourth column
 		btn4.addActionListener(new Btn4ActionListener());
 		btn4.setBounds((SPACER * 4) + (GRID_WIDTH * 3), ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);;
 		frmConnectFour.getContentPane().add(btn4);
 
-		btn5 = new JButton("5");
+		btn5 = new JButton("5");//button to throw square in the fifth column
 		btn5.addActionListener(new Btn5ActionListener());
 		btn5.setBounds((SPACER * 5) + (GRID_WIDTH * 4), ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);;
 		frmConnectFour.getContentPane().add(btn5);
 
-		btn6 = new JButton("6");
+		btn6 = new JButton("6");//button to throw square in the sixth column
 		btn6.addActionListener(new Btn6ActionListener());
 		btn6.setBounds((SPACER * 6) + (GRID_WIDTH * 5), ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);;
 		frmConnectFour.getContentPane().add(btn6);
 
-		btn7 = new JButton("7");
+		btn7 = new JButton("7");//button to throw square in the seventh column
 		btn7.addActionListener(new Btn7ActionListener());
 		btn7.setBounds((SPACER * 7) + (GRID_WIDTH * 6), ((BOARD_HEIGHT + 1) * (GRID_WIDTH + SPACER)), GRID_WIDTH, 25);;
 		frmConnectFour.getContentPane().add(btn7);
@@ -111,7 +112,7 @@ public class ConnectFour {
 		lblActivePlayerText.setForeground(Color.BLACK);
 		lblActivePlayerText.setBackground(Color.LIGHT_GRAY);
 		lblActivePlayerText.setFont(new Font("Consolas", lblActivePlayerText.getFont().getStyle() | Font.BOLD, lblActivePlayerText.getFont().getSize() + 5));
-		lblActivePlayerText.setHorizontalAlignment(SwingConstants.CENTER);
+		lblActivePlayerText.setHorizontalAlignment(SwingConstants.CENTER);//player's name in the title box above grid
 		lblActivePlayerText.setBounds(5, 5, (GRID_WIDTH * 7) + (SPACER * 6), GRID_WIDTH - SPACER);
 		lblActivePlayerText.setBorder(BorderFactory.createLineBorder(Color.black));
 		frmConnectFour.getContentPane().add(lblActivePlayerText);
@@ -132,15 +133,15 @@ public class ConnectFour {
 				if (playerNum == 1){
 					String[] names = {"Captain Qwark", "M. Night Shamamallamasama", "Iron Guts Kelly", "Sgt. Sarcasm", "THE NULL", "Tron", "Dot Matrix", "Skynet", "GLaDoS (the potato)", "Deep Thought"};
 					Random randomGen = new Random();
-					int random = randomGen.nextInt(10);
+					int random = randomGen.nextInt(10);//Generates a given name within the arraylist if player didn't type a name yet
 					response = names[random];
-					JOptionPane.showMessageDialog(null, "Fine, then you shall be named:\n" + response);
+					JOptionPane.showMessageDialog(null, "Fine, then you shall be named:\n" + response);//Change response quote
 				} else {
 					String[] names = {"Dr. Nefarious", "Mickey Bay", "Ferret Face Burns", "Captain Oblivious", "THE VOID", "Clu", "Bob", "Da Terminator", "Baby Chell", "Arthur Dent"};
 					Random randomGen = new Random();
 					int random = randomGen.nextInt(10);
 					response = names[random];
-					JOptionPane.showMessageDialog(null, "A wise guy, eh?\nThen you shall be called:\n" + response);				
+					JOptionPane.showMessageDialog(null, "A wise guy, eh?\nThen you shall be called:\n" + response);//Change response quote			
 				}
 			}
 			Color playerColor = color;
@@ -173,7 +174,7 @@ public class ConnectFour {
 		boardArray = tempArray;
 	}
 
-	private class Btn1ActionListener implements ActionListener {
+	private class Btn1ActionListener implements ActionListener {//Activates button 1 to set piece on grid into the 1st row
 
 		public void actionPerformed(ActionEvent arg0) {
 			int xTarget = 0;
@@ -182,7 +183,7 @@ public class ConnectFour {
 		}
 	}
 
-	private void checkColumn(int column) {
+	private void checkColumn(int column) {//Checks column for pieces to go into
 		int xTarget = column;	
 
 		ArrayList<Grid> yArray = boardArray.get(xTarget);
@@ -203,14 +204,14 @@ public class ConnectFour {
 					canPlace = false;
 					break;
 				}
-				yTarget--;
+				yTarget--;//Causes players to put pieces on to of each in the next row above
 			}
 
 		} while (!doneYet); 
 
 		if (canPlace) {
-			targetGrid.setBackground(activePlayer.getPlayerColor());
-			targetGrid.setPlayerOwner(activePlayer.getPlayerNum());	
+			targetGrid.setBackground(activePlayer.getPlayerColor());//Identifies whose piece is whose on the grid by color//Identifies whose piece is whose on the grid by color
+			targetGrid.setPlayerOwner(activePlayer.getPlayerNum());//Identifies whose piece is whose on the grid by players #
 		}
 	}
 
@@ -232,8 +233,8 @@ public class ConnectFour {
 		 */
 	}
 
-	private void errorMessage() {
-		JOptionPane.showMessageDialog(null, "You can't put a piece there!\nHaha, you lose your turn!");
+	private void errorMessage() {//lose your turn if you overflow the column
+		JOptionPane.showMessageDialog(null, "You can't put a piece there!\nHaha, you lose your turn!");//change response quote/message
 
 		if (activePlayer.getPlayerNum() == 1){
 			JOptionPane.showMessageDialog(null, "Player 2, your turn!");
@@ -243,50 +244,50 @@ public class ConnectFour {
 		targetGrid = null;
 	}
 
-	private class Btn2ActionListener implements ActionListener {
+	private class Btn2ActionListener implements ActionListener {//Activates button 2 to input colored square into the 2nd row
 		public void actionPerformed(ActionEvent e) {
 			int xTarget = 1;	
 			checkColumn(xTarget);
 			checkVictory(xTarget);
 		}
 	}
-	private class Btn3ActionListener implements ActionListener {
+	private class Btn3ActionListener implements ActionListener {//Activates button 3 to input colored square into the 3rd row
 		public void actionPerformed(ActionEvent e) {
 			int xTarget = 2;	
 			checkColumn(xTarget);
 			checkVictory(xTarget);
 		}
 	}
-	private class Btn4ActionListener implements ActionListener {
+	private class Btn4ActionListener implements ActionListener {//Activates button 4 to input colored square into the 4th row
 		public void actionPerformed(ActionEvent e) {
 			int xTarget = 3;	
 			checkColumn(xTarget);
 			checkVictory(xTarget);
 		}
 	}
-	private class Btn5ActionListener implements ActionListener {
+	private class Btn5ActionListener implements ActionListener {//Activates button 5 to input colored square into the 5th row
 		public void actionPerformed(ActionEvent e) {
 			int xTarget = 4;	
 			checkColumn(xTarget);
 			checkVictory(xTarget);
 		}
 	}
-	private class Btn6ActionListener implements ActionListener {
+	private class Btn6ActionListener implements ActionListener {//Activates button 6 to input colored square into the 6th row
 		public void actionPerformed(ActionEvent e) {
 			int xTarget = 5;	
 			checkColumn(xTarget);
 			checkVictory(xTarget);
 		}
 	}
-	private class Btn7ActionListener implements ActionListener {
+	private class Btn7ActionListener implements ActionListener {//Activates button 7 to input colored square into the 7th row
 		public void actionPerformed(ActionEvent e) {
 			int xTarget = 6;	
 			checkColumn(xTarget);
 			checkVictory(xTarget);
 		}
 	}
-	private void checkVictory(int activeColumn){
-		if (targetGrid != null){
+	private void checkVictory(int activeColumn){//Makes sure if somebody wins the game
+		if (targetGrid != null){//if == to null, nobody wouldn't win at all
 			int gridY = targetGrid.getYBlock();
 			int horizCount = 1;
 			int vertCount = 1;
@@ -296,26 +297,26 @@ public class ConnectFour {
 			ArrayList<Grid> testColumn = boardArray.get(activeColumn);
 			Grid activeGrid = testColumn.get(gridY);
 
-			vertCount = testDown(activeGrid, activeColumn, vertCount);
-			horizCount = testRight(activeGrid, activeColumn, horizCount);
-			horizCount = testLeft(activeGrid, activeColumn, horizCount);
-			negDiagCount = testUpLeft(activeGrid, activeColumn, negDiagCount);
-			negDiagCount = testDownRight(activeGrid, activeColumn, negDiagCount);
-			posDiagCount = testDownLeft(activeGrid, activeColumn, posDiagCount);
-			posDiagCount = testUpRight(activeGrid, activeColumn, posDiagCount);
+			vertCount = testDown(activeGrid, activeColumn, vertCount);//connects with the class testDown
+			horizCount = testRight(activeGrid, activeColumn, horizCount);//connects with the class testRight
+			horizCount = testLeft(activeGrid, activeColumn, horizCount);//connects with the class testLeft
+			negDiagCount = testUpLeft(activeGrid, activeColumn, negDiagCount);//connects with the class testUpLeft
+			negDiagCount = testDownRight(activeGrid, activeColumn, negDiagCount);//connects with the class testDownRight
+			posDiagCount = testDownLeft(activeGrid, activeColumn, posDiagCount);//connects with the class testDownLeft
+			posDiagCount = testUpRight(activeGrid, activeColumn, posDiagCount);//connects with the class testUpRight
 
-			if (horizCount >= 4 || vertCount >= 4 || negDiagCount >= 4 || posDiagCount >= 4){
+			if (horizCount >= 4 || vertCount >= 4 || negDiagCount >= 4 || posDiagCount >= 4){//checking every angle to declare
 				gameWinner = true;
 			}
 
 			if (gameWinner) {
 				JOptionPane.showMessageDialog(null, activePlayer.getPlayerName() + " has won the game!\n" + 
-						"It took " + turnCounter + " turns to do so!\n" + generateWittyRemark());
+						"It took " + turnCounter + " turns to do so!\n" + generateWittyRemark());//congratulates player's victory with witty response
 				System.exit(3); //close program
 			} 
 		}
 		if (turnCounter > 43) {
-			forceDraw();
+			forceDraw();//game over, can't wait all day for a winner
 		}
 		changePlayer();
 		updateTurnLabel();
@@ -329,19 +330,19 @@ public class ConnectFour {
 
 	private String generateWittyRemark() {
 		String remark;
-		if (turnCounter < 7) {
+		if (turnCounter < 7) {//if player wins in less than 7 turns
 			remark = "Did you cheat or did we have a bug?";
-		} else if (turnCounter == 7) {
+		} else if (turnCounter == 7) {//if player wins in than 7 turns
 			remark = "Was this a test, or was someone drinking?";
-		} else if (turnCounter < 12) {
+		} else if (turnCounter < 12) {//if player wins in more than 12 turns
 			remark = "That was...quick.";
-		} else if (turnCounter < 24 ) {
+		} else if (turnCounter < 24 ) {//if player wins in more than 24 turns
 			remark = "Good game!";
-		} else if (turnCounter < 36 ) {
+		} else if (turnCounter < 36 ) {//if player wins in more than 36 turns
 			remark = "Do you guys have a system for this?";
-		} else if (turnCounter < 41 ) {
+		} else if (turnCounter < 41 ) {//if player wins in more than 41 turns
 			remark = "You really didn't want to lose!";
-		} else if (turnCounter == 41 ){
+		} else if (turnCounter == 41 ){//if player wins in exactly 41 turns
 			remark = "Holy cheese!\nIf this was a legitimate match,\nI want a video!";
 		} else {
 			remark = "Now how about double or nothing?";
@@ -349,7 +350,7 @@ public class ConnectFour {
 		return remark;
 	}
 
-	private int testUpRight(Grid activeGrid, int activeColumn, int posDiagCount) {
+	private int testUpRight(Grid activeGrid, int activeColumn, int posDiagCount) {//checks positive diagonal for a winner (/)
 		int gridY = targetGrid.getYBlock();
 		int gridX = targetGrid.getXBlock();
 		ArrayList<Grid> testColumn = boardArray.get(activeColumn);
@@ -383,7 +384,7 @@ public class ConnectFour {
 		return returnCount;
 	}
 
-	private int testDownRight(Grid activeGrid, int activeColumn, int negDiagCount) {
+	private int testDownRight(Grid activeGrid, int activeColumn, int negDiagCount) {//checks negative diagonally for a winner (\)
 		int gridY = targetGrid.getYBlock();
 		int gridX = targetGrid.getXBlock();
 		ArrayList<Grid> testColumn = boardArray.get(activeColumn);
@@ -417,7 +418,7 @@ public class ConnectFour {
 		return returnCount;
 	}
 
-	private int testDownLeft(Grid activeGrid, int activeColumn, int posDiagCount) {
+	private int testDownLeft(Grid activeGrid, int activeColumn, int posDiagCount) {//checks positive diagonally for a winner (/)
 		int gridY = targetGrid.getYBlock();
 		int gridX = targetGrid.getXBlock();
 		ArrayList<Grid> testColumn = boardArray.get(activeColumn);
@@ -451,7 +452,7 @@ public class ConnectFour {
 		return returnCount;
 	}
 
-	private int testUpLeft(Grid activeGrid, int activeColumn, int negDiagCount) {
+	private int testUpLeft(Grid activeGrid, int activeColumn, int negDiagCount) {//checks negative diagonally for a winner (\)
 		int gridY = targetGrid.getYBlock();
 		int gridX = targetGrid.getXBlock();
 		ArrayList<Grid> testColumn = boardArray.get(activeColumn);
@@ -485,7 +486,7 @@ public class ConnectFour {
 		return returnCount;
 	}
 
-	private int testLeft(Grid activeGrid, int activeColumn, int horizCount) {
+	private int testLeft(Grid activeGrid, int activeColumn, int horizCount) {//checks left side for a winner (<--)
 		int gridY = targetGrid.getYBlock();
 		int gridX = targetGrid.getXBlock();
 		ArrayList<Grid> testColumn = boardArray.get(activeColumn);
@@ -519,7 +520,7 @@ public class ConnectFour {
 		return returnCount;
 	}
 
-	private int testRight(Grid activeGrid, int activeColumn, int horizCount) {
+	private int testRight(Grid activeGrid, int activeColumn, int horizCount) {//checks right side to declare winner (-->)
 		int gridY = targetGrid.getYBlock();
 		int gridX = targetGrid.getXBlock();
 		ArrayList<Grid> testColumn = boardArray.get(activeColumn);
@@ -553,7 +554,7 @@ public class ConnectFour {
 		return returnCount;
 	}
 
-	private int testDown(Grid activeGrid, int activeColumn, int vertCount) {
+	private int testDown(Grid activeGrid, int activeColumn, int vertCount) {//Checks down the column to declare winner (|)
 		int gridY = targetGrid.getYBlock();
 		ArrayList<Grid> testColumn = boardArray.get(activeColumn);
 		int returnCount = vertCount;
