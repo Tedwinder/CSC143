@@ -12,7 +12,7 @@ import org.jsoup.select.Elements;
 
 
 
-public class ReadXMLFile {
+public class ReadXML {
 	
 	
 	
@@ -55,20 +55,25 @@ public class ReadXMLFile {
 		        	
 		        	Elements definition = element.getElementsByTag("def");
 		        	Elements word = element.getElementsByTag("ent");
-		        	Elements pronunciation = element.getElementsByTag("pr");
+		        	Elements pronunciation = element.getElementsByTag("pos");
 		        	if (!(word.isEmpty())){
 		        		String w=word.text();
-		        		w=w.replace('"', '\"');
-		        		w=w.replace("'", "\'");
+		        		w=w.replace("\"", "\\\"");
+		        		w=w.replace("'", "\\'");
 		        		String d=definition.text();
-		        		d=d.replace('"', '\"');
-		        		d=d.replace("'", "\'");
+		        		d=d.replace("\"", "\\\"");
+		        		d=d.replace("'", "\\'");
 		        		String p=pronunciation.text();
-		        		p=p.replace('"', '\"');
-		        		p=p.replace("'", "\'");
-		        	writer.println("db.execSQL(\"INSERT INTO word VALUES (" + i + ", '" 
+		        		p=p.replace("\"", "\\\"");
+		        		p=p.replace("'", "\\'");
+		        		String moby="INSERT INTO word VALUES (" + i + ", '" 
+			        			+ w + "',  '" + d + 
+			        			"', "+ "'" + p + "')" + "\n";
+			        		writer.write(moby);
+		        	/*writer.println("db.execSQL(\"INSERT INTO word VALUES (" + i + ", '" 
 		        			+ w + "',  '" + d + 
-		        			"', " + p + "')\");" + "\n");i++;}
+		        			"', "+ "'" + p + "')\");" + "\n");i++;*/
+		        			}
 		        	//db.execSQL("INSERT INTO word VALUES (0, 'thingy', 'some sort of thingy', 'etc.')");
 		        	
 		        }System.out.println("A");
@@ -102,23 +107,27 @@ public class ReadXMLFile {
 				        	
 				        	Elements definition = element.getElementsByTag("def");
 				        	Elements word = element.getElementsByTag("ent");
-				        	Elements pronunciation = element.getElementsByTag("pr");
+				        	Elements pronunciation = element.getElementsByTag("pos");
 				        	if (!(word.isEmpty())){
 				        		//insert escape characters into quotations if any
 				        		String w=word.text();
-				        		w=w.replace('"', '\"');
-				        		w=w.replace("'", "\'");
+				        		w=w.replace("\"", "\\\"");
+				        		w=w.replace("'", "\\'");
 				        		String d=definition.text();
-				        		d=d.replace('"', '\"');
-				        		d=d.replace("'", "\'");
+				        		d=d.replace("\"", "\\\"");
+				        		d=d.replace("'", "\\'");
 				        		String p=pronunciation.text();
-				        		p=p.replace('"', '\"');
-				        		p=p.replace("'", "\'");
-				        		bufferWritter.write("db.execSQL(\"INSERT INTO word VALUES (" + i + ", '" 
+				        		p=p.replace("\"", "\\\"");
+				        		p=p.replace("'", "\\'");
+				        		String moby="INSERT INTO word VALUES (" + i + ", '" 
 				        			+ w + "',  '" + d + 
-				        			"', " + p + "')\");" + "\n");i++;}
+				        			"', "+ "'" + p + "')"+ "\n";
+				        		bufferWritter.write(moby);
+				        		/*bufferWritter.write("db.execSQL(\"INSERT INTO word VALUES (" + i + ", '" 
+				        			+ w + "',  '" + d + 
+				        			"', "+ "'" + p + "')\");" + "\n");i++;}*/
 		        	 
-		        	 
+				        	}
 		        }
 		        
 		        
